@@ -1,1 +1,1 @@
-console.log("message: Starting database...");
+console.log('Starting database...');

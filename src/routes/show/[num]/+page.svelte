@@ -1,11 +1,10 @@
 <script>
 	export let data;
-
-	$: ({ episode } = data);
+	$: ({ episode, user } = data);
 </script>
 
-<h2>{episode.title}</h2>
+<h1>{user.email}</h1>
 
-<div class="episode">
-	{@html episode.html}
-</div>
+<h1>{episode.title}</h1>
+
+{@html episode.html}

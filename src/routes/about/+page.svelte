@@ -1,2 +1,3 @@
-<h2>About</h2>
-<p>About me</p>
+<h1>About Us</h1>
+
+<a href="/">Home</a>

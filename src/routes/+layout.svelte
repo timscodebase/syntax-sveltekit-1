@@ -1,23 +1,34 @@
 <script>
-	import Footer from '$lib/Footer.svelte';
-	import Header from '$lib/Header.svelte';
+	import Header from './Header.svelte';
+	import Footer from './Footer.svelte';
+	import './styles.css';
+	import Episodes from './Episodes.svelte';
 
-	import '$db/start';
-	import './reset.css';
-	import './style.css';
+	export let data;
+	$: ({ all_episodes } = data);
 </script>
 
 <Header />
 
 <main>
-	<slot />
+	<div class="main">
+		<slot />
+	</div>
+	<aside>
+		<Episodes episodes={all_episodes} />
+	</aside>
 </main>
 
 <Footer />
 
 <style>
 	main {
-		background: rgb(202, 191, 191);
-		padding: 1rem;
+		display: grid;
+		grid-template-columns: 300px 1fr;
+		gap: 20px;
+	}
+
+	aside {
+		order: -1;
 	}
 </style>

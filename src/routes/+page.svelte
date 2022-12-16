@@ -1,26 +1,12 @@
 <script>
+	import Test from '$lib/Test.svelte';
+	import '$db/start';
 	export let data;
 
-	$: ({ latest_episode, all_episodes } = data);
+	$: ({ latest_episode } = data);
+	// const { latest_episode } = data;
 </script>
 
-<!-- {JSON.stringify(latest_episode, null, 2)} -->
+<h3>{latest_episode.title}</h3>
 
-<h2>{latest_episode.title}</h2>
-
-<nav>
-	<ul>
-		{#each all_episodes as episode}
-			<li>
-				<a href={`/show/${episode.number}`}>{episode.title}</a>
-			</li>
-		{/each}
-	</ul>
-</nav>
-
-<style>
-	a {
-		text-decoration: underline;
-		cursor: pointer;
-	}
-</style>
+<Test />
