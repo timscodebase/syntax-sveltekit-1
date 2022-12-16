@@ -1,4 +1,6 @@
 <script>
+	import {} from '$app/environment';
+	import { navigating } from '$app/stores';
 	import Header from './Header.svelte';
 	import Footer from './Footer.svelte';
 	import './styles.css';
@@ -6,11 +8,15 @@
 
 	export let data;
 	$: ({ all_episodes } = data);
+	$: console.log(!!$navigating);
 </script>
 
 <Header />
 
 <main>
+	{#if $navigating}
+		<div class="loading">Loading</div>
+	{/if}
 	<div class="main">
 		<slot />
 	</div>
@@ -30,5 +36,14 @@
 
 	aside {
 		order: -1;
+	}
+
+	.loading {
+		position: fixed;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: blue;
 	}
 </style>
