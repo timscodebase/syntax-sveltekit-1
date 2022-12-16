@@ -11,9 +11,6 @@ export const actions = {
 		const email = data.get('email');
 		const message = data.get('message');
 
-		// Fake send email
-		console.log(name, email, message);
-
 		return {
 			message: 'Email Sent!'
 		};

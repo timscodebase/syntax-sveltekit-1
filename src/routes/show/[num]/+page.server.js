@@ -2,7 +2,6 @@ import { error, redirect } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 
 import { LUT_API } from '$env/static/private';
-console.log('LUT_API', LUT_API);
 
 export async function load({ fetch, params, setHeaders, locals }) {
 	if (!locals?.user?.id) throw redirect(307, '/');

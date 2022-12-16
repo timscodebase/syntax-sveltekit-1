@@ -10,7 +10,6 @@
 	// preloadData -> load data from load functions for given routes
 	import { env } from '$env/dynamic/public';
 	import { PUBLIC_LUT_PUB_KEY } from '$env/static/public';
-	console.log('PUBLIC_LUT_PUB_KEY', PUBLIC_LUT_PUB_KEY);
 
 	import { browser, building, dev, version } from '$app/environment';
 	import { navigating } from '$app/stores';
@@ -20,7 +19,6 @@
 	import Episodes from './Episodes.svelte';
 	export let data;
 	$: ({ all_episodes } = data);
-	console.log(browser, building, dev, version);
 	// browser -> boolean, if app is running in browser
 	// dev -> boolean, if in development
 	// building -> boolean, true, IF currently build for production
