@@ -17,7 +17,6 @@
 	import Header from './Header.svelte';
 	import Footer from './Footer.svelte';
 	import './styles.css';
-
 	import Episodes from './Episodes.svelte';
 	export let data;
 	$: ({ all_episodes } = data);
@@ -30,7 +29,7 @@
 
 <Header />
 
-<!--{#if !!$navigating}
+<!-- {#if !!$navigating}
 	<div class="loading">Loading</div>
 {/if} -->
 
