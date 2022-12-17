@@ -1,10 +1,20 @@
 <script>
+	import AudioPlayer from '$lib/AudioPlayer.svelte';
 	export let data;
+
 	$: ({ episode, user } = data);
+	$: src = episode.url;
 </script>
 
-<h1>{user.email}</h1>
+<article>
+	<h1>{episode.title}</h1>
+	<AudioPlayer {src} />
 
-<h1>{episode.title}</h1>
+	{@html episode.html}
+</article>
 
-{@html episode.html}
+<style>
+	article {
+		padding: 2rem 1rem;
+	}
+</style>

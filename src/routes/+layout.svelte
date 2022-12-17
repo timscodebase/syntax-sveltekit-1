@@ -1,5 +1,5 @@
 <script>
-	import { goto } from '$app/navigation';
+	// import { goto } from '$app/navigation';
 	// https://github.com/sveltejs/svelte-preprocess
 	// lifecycle, afterNavigate, beforeNavigate
 	// disableScrollHandling - SvelteKit's built in scroll handling
@@ -15,8 +15,11 @@
 	import { navigating } from '$app/stores';
 	import Header from './Header.svelte';
 	import Footer from './Footer.svelte';
-	import './styles.css';
 	import Episodes from './Episodes.svelte';
+
+	import './reset.css';
+	import './styles.css';
+
 	export let data;
 	$: ({ all_episodes } = data);
 	// browser -> boolean, if app is running in browser
@@ -27,13 +30,8 @@
 
 <Header />
 
-<!-- {#if !!$navigating}
-	<div class="loading">Loading</div>
-{/if} -->
-
 <main>
 	<div class="main">
-		<button on:click={() => goto('/contact')}>Change Page</button>
 		<slot />
 	</div>
 	<aside>
@@ -48,19 +46,19 @@
 		display: grid;
 		grid-template-columns: 300px 1fr;
 		gap: 20px;
+		max-width: var(--max-width);
+		margin: 0 auto;
+		border-right: 1px solid var(--grey);
+	}
+
+	.main {
+		max-height: 100vh;
+		overflow-y: scroll;
 	}
 
 	aside {
+		max-height: 100vh;
+		overflow-y: scroll;
 		order: -1;
-	}
-
-	.loading {
-		position: fixed;
-		inset: 0;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background-color: blue;
-		color: white;
 	}
 </style>

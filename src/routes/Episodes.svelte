@@ -11,3 +11,19 @@
 		{/each}
 	</ul>
 </nav>
+
+<style>
+	ul {
+		list-style: none;
+		padding: 0;
+		border: 1px solid var(--grey);
+	}
+
+	li {
+		padding: 1rem;
+		border-bottom: 1px solid var(--grey);
+	}
+	li:last-child {
+		border-bottom: none;
+	}
+</style>

@@ -1,15 +1,19 @@
 <header>
-	<h1>Level Up Blog</h1>
+	<div class="inner">
+		<h1>Syntax Clone</h1>
+	</div>
 </header>
 
 <style>
 	header {
 		background: #333;
+		background: var(--header-bg);
 		color: #fff;
 		padding: 1rem;
 	}
 
-	h1 {
-		font-size: 16px;
+	.inner {
+		max-width: 800px;
+		margin: 0 auto;
 	}
 </style>
