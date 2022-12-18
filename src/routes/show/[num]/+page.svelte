@@ -5,14 +5,12 @@
 	export let data;
 
 	$: ({ episode, user } = data);
-	$: src = episode.url;
 
 	beforeUpdate(() => {
 		current_episode.set(episode);
 	});
 </script>
 
-<!-- <AudioPlayer {src} /> -->
 <article>
 	<h1>{episode.title}</h1>
 
