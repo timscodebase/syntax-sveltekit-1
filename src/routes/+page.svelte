@@ -10,7 +10,7 @@
 	$: src = latest_episode.url;
 </script>
 
-<AudioPlayer {src} />
+<!-- <AudioPlayer {src} /> -->
 <article>
 	<h1>{latest_episode.title}</h1>
 
