@@ -45,10 +45,11 @@
 	main {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 20px;
 		max-width: var(--max-width);
 		margin: 0 auto;
 		background: rgba(0, 0, 0, 0.1);
+		border-left: 3px solid var(--grey);
+		border-right: 3px solid var(--grey);
 	}
 
 	.main {
