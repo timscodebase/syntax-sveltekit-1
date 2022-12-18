@@ -6,9 +6,9 @@
 	$: src = episode.url;
 </script>
 
+<AudioPlayer {src} />
 <article>
 	<h1>{episode.title}</h1>
-	<AudioPlayer {src} />
 
 	{@html episode.html}
 </article>

@@ -6,8 +6,7 @@
 
 <style>
 	header {
-		background: #333;
-		background: var(--header-bg);
+		background: var(--dark-grad);
 		color: #fff;
 		padding: 1rem;
 	}

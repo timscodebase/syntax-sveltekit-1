@@ -31,34 +31,35 @@
 <Header />
 
 <main>
-	<div class="main">
-		<slot />
-	</div>
 	<aside>
 		<Episodes episodes={all_episodes} />
 	</aside>
+	<div class="main">
+		<slot />
+	</div>
 </main>
 
 <Footer />
 
 <style lang="postcss">
 	main {
-		display: grid;
-		grid-template-columns: 300px 1fr;
+		display: flex;
+		flex-wrap: wrap;
 		gap: 20px;
 		max-width: var(--max-width);
 		margin: 0 auto;
-		border-right: 1px solid var(--grey);
+		background: rgba(0, 0, 0, 0.1);
 	}
 
 	.main {
 		max-height: 100vh;
 		overflow-y: scroll;
+		flex: 2;
 	}
 
 	aside {
 		max-height: 100vh;
 		overflow-y: scroll;
-		order: -1;
+		width: 300px;
 	}
 </style>
