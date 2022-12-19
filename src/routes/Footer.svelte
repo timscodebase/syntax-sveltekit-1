@@ -10,6 +10,6 @@
 		justify-content: space-around;
 		gap: 2rem;
 		background: var(--dark-grad);
-		border-top: 3px solid var(--grey);
+		border-top: 3px solid var(--purple);
 	}
 </style>

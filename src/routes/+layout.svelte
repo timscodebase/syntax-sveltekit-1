@@ -14,12 +14,13 @@
 	$: current_episode.set(all_episodes[0]);
 
 	$: src = $current_episode.url;
+	$: title = $current_episode.title;
 </script>
 
 <Header />
 
 <div class="wrapper">
-	<AudioPlayer {src} />
+	<AudioPlayer {src} {title} />
 </div>
 <main>
 	<aside>
@@ -35,16 +36,16 @@
 <style lang="postcss">
 	.wrapper,
 	main {
-		max-width: var(--max-width);
 		margin: 0 auto;
+		max-width: var(--max-width);
+		border-left: 3px solid var(--purple);
+		border-right: 3px solid var(--purple);
 	}
 
 	main {
 		display: flex;
 		flex-wrap: wrap;
 		background: rgba(0, 0, 0, 0.1);
-		border-left: 3px solid var(--grey);
-		border-right: 3px solid var(--grey);
 	}
 
 	.main {

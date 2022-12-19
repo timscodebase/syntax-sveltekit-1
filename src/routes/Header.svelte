@@ -9,7 +9,7 @@
 		background: var(--dark-grad);
 		color: #fff;
 		padding: 1rem;
-		border-bottom: 3px solid var(--grey);
+		border-bottom: 3px solid var(--purple);
 	}
 
 	.inner {

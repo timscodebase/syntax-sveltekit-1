@@ -3,6 +3,7 @@
 	import lottieWeb from 'lottie-web';
 
 	export let src = '';
+	export let title = '';
 
 	onMount(() => {
 		const playIconContainer = document.getElementById('play-icon');
@@ -47,17 +48,17 @@
 			}
 		});
 
-		muteIconContainer.addEventListener('click', () => {
-			if (muteState === 'unmute') {
-				muteAnimation.playSegments([0, 15], true);
-				audio.muted = true;
-				muteState = 'mute';
-			} else {
-				muteAnimation.playSegments([15, 25], true);
-				audio.muted = false;
-				muteState = 'unmute';
-			}
-		});
+		// muteIconContainer.addEventListener('click', () => {
+		// 	if (muteState === 'unmute') {
+		// 		muteAnimation.playSegments([0, 15], true);
+		// 		audio.muted = true;
+		// 		muteState = 'mute';
+		// 	} else {
+		// 		muteAnimation.playSegments([15, 25], true);
+		// 		audio.muted = false;
+		// 		muteState = 'unmute';
+		// 	}
+		// });
 
 		const showRangeProgress = (rangeInput) => {
 			if (rangeInput === seekSlider)
@@ -158,64 +159,80 @@
 </script>
 
 <div id="audio-player-container">
-	<div class="flex">
-		<audio {src} preload="metadata" loop />
-
+	<audio {src} preload="metadata" loop />
+	<div class="left">
 		<button id="play-icon" />
-		<span id="current-time" class="time">0:00</span>
-		<input type="range" id="seek-slider" max="100" value="0" />
-		<span id="duration" class="time">0:00</span>
+		<span class="play-time">
+			<span id="current-time" class="time">0:00</span>/
+			<span id="duration" class="time">0:00</span>
+		</span>
 	</div>
-	<div class="flex">
-		<output id="volume-output">100</output>
-		<input type="range" id="volume-slider" max="100" value="100" />
-		<button id="mute-icon" />
+	<div class="middle">
+		<input type="range" id="seek-slider" max="100" value="0" />
+		<p>Playing: {title}</p>
+	</div>
+	<div class="volume">
+		<div>
+			<input type="range" id="volume-slider" max="100" value="100" />
+			<span>Volume:</span><output id="volume-output">100</output>
+		</div>
 	</div>
 </div>
 
 <style>
+	#audio-player-container {
+		--seek-before-width: 0%;
+		--volume-before-width: 100%;
+		--buffered-width: 0%;
+		background: rgba(255, 255, 255, 0.579);
+		position: relative;
+		display: grid;
+		grid-template-columns: 80px 1fr 200px;
+		color: var(--dark-purple);
+		gap: 1rem;
+	}
 	button {
+		--size: 80px;
 		padding: 0;
 		border: 0;
 		background: transparent;
 		cursor: pointer;
 		outline: none;
-		width: 40px;
-		height: 40px;
+		width: var(--size);
+		height: var(--size);
+		color: var(--dark-purple);
 	}
 	p {
 		padding: 0.25rem;
 	}
-	.flex {
+	.left,
+	.middle,
+	.volume {
 		display: flex;
+		flex-direction: column;
 		justify-content: space-between;
-		flex-wrap: wrap;
 		align-items: center;
 	}
-	#audio-player-container {
-		--seek-before-width: 0%;
-		--volume-before-width: 100%;
-		--buffered-width: 0%;
-		position: relative;
+	.left,
+	.volume {
+		padding: 1rem 0;
+	}
+	.middle {
+		padding: 1rem 0;
+	}
+	.volume {
 		padding: 1rem;
-		margin-bottom: 1rem;
-		background: #ffffffad;
-		color: var(--dark-purple);
-		font-family: var(--heading-font);
 	}
-	#play-icon {
-		/* margin: 20px 2.5% 10px 0; */
+	.volume span {
+		margin-right: 2rem;
 	}
-	#seek-slider {
-		width: 50%;
-	}
-	path {
-		stroke: var(--dark-purple);
-	}
-	.time {
+	.middle p {
 		display: inline-block;
-		text-align: center;
-		font-size: 1.25rem;
+		font-size: 0.8rem;
+		width: 100%;
+	}
+	.play-time {
+		font-size: 0.7rem;
 	}
 	output {
 		display: inline-block;
@@ -223,10 +240,9 @@
 		text-align: center;
 		font-size: 20px;
 	}
-	#volume-slider {
-		margin: 10px 2.5%;
+	/* #volume-slider {
 		width: 58%;
-	}
+	} */
 	#volume-slider::-webkit-slider-runnable-track {
 		background: var(--dark-purple);
 	}
@@ -245,16 +261,16 @@
 	input[type='range'] {
 		position: relative;
 		-webkit-appearance: none;
-		width: 40%;
+		width: 100%;
 		margin: 0;
+		margin-top: 1rem;
 		padding: 0;
 		height: 19px;
-		/* margin: 30px 2.5% 20px 2.5%; */
 		outline: none;
 	}
 	input[type='range']::-webkit-slider-runnable-track {
 		width: 100%;
-		height: 3px;
+		height: 19px;
 		cursor: pointer;
 		background: linear-gradient(
 			to right,
@@ -277,75 +293,11 @@
 		-webkit-appearance: none;
 		box-sizing: content-box;
 		border: 1px solid var(--dark-purple);
-		height: 15px;
-		width: 15px;
-		border-radius: 50%;
+		height: 24px;
+		width: 5px;
+		border-radius: 50vw;
 		background-color: var(--white);
 		cursor: pointer;
-		margin: -7px 0 0 0;
-	}
-	input[type='range']:active::-webkit-slider-thumb {
-		transform: scale(1.2);
-		background: var(--dark-purple);
-	}
-	input[type='range']::-moz-range-track {
-		width: 100%;
-		height: 3px;
-		cursor: pointer;
-		background: linear-gradient(
-			to right,
-			var(--purple) var(--buffered-width),
-			var(--dark-purple) var(--buffered-width)
-		);
-	}
-	input[type='range']::-moz-range-progress {
-		background-color: var(--dark-purple);
-	}
-	input[type='range']::-moz-focus-outer {
-		border: 0;
-	}
-	input[type='range']::-moz-range-thumb {
-		box-sizing: content-box;
-		border: 1px solid var(--dark-purple);
-		height: 15px;
-		width: 15px;
-		border-radius: 50%;
-		background-color: #fff;
-		cursor: pointer;
-	}
-	input[type='range']:active::-moz-range-thumb {
-		transform: scale(1.2);
-		background: var(--dark-purple);
-	}
-	input[type='range']::-ms-track {
-		width: 100%;
-		height: 3px;
-		cursor: pointer;
-		background: transparent;
-		border: solid transparent;
-		color: transparent;
-	}
-	input[type='range']::-ms-fill-lower {
-		background-color: var(--dark-purple);
-	}
-	input[type='range']::-ms-fill-upper {
-		background: linear-gradient(
-			to right,
-			var(--purple) var(--buffered-width),
-			var(--dark-purple) var(--buffered-width)
-		);
-	}
-	input[type='range']::-ms-thumb {
-		box-sizing: content-box;
-		border: 1px solid var(--dark-purple);
-		height: 15px;
-		width: 15px;
-		border-radius: 50%;
-		background-color: #fff;
-		cursor: pointer;
-	}
-	input[type='range']:active::-ms-thumb {
-		transform: scale(1.2);
-		background: var(--dark-purple);
+		margin: -3px 0 0 7.5px;
 	}
 </style>
