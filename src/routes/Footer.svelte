@@ -1,6 +1,8 @@
 <footer>
 	<a href="/contact">Contact</a>
-	<p>Level Up Tutorials</p>
+	<a href="https://www.leveluptutorials.com" target="_blank" rel="noopener noreferrer">
+		Level Up Tutorials
+	</a>
 </footer>
 
 <style>
