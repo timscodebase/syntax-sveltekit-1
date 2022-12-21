@@ -4,49 +4,45 @@
 
 	export let src = '';
 	export let title = '';
-	let playState = 'play';
+	let playing = false;
 
 	onMount(() => {
+		const play_button = document.querySelector('#play_button');
 		const play = document.querySelector('.play');
 		const pause = document.querySelector('.pause');
 		const audioPlayerContainer = document.getElementById('audio-player-container');
 		const seekSlider = document.querySelector('.seek-slider');
 		const volumeSlider = document.getElementById('volume-slider');
 
-		console.log('play', play);
-
-		play?.addEventListener('click', () => {
-			console.log('play');
-			audio?.play();
-			playState = 'pause';
-			play.classList.toggle('hide');
-			pause.classList.toggle('hide');
-		});
-		pause?.addEventListener('click', () => {
-			console.log('pause');
-			audio?.pause();
-			playState = 'play';
-			play.classList.toggle('hide');
-			pause.classList.toggle('hide');
-		});
-
 		const showRangeProgress = (rangeInput) => {
 			if (rangeInput === seekSlider)
-				audioPlayerContainer.style.setProperty(
+				audioPlayerContainer?.style.setProperty(
 					'--seek-before-width',
 					(rangeInput.value / rangeInput.max) * 100 + '%'
 				);
 			else
-				audioPlayerContainer.style.setProperty(
+				audioPlayerContainer?.style.setProperty(
 					'--volume-before-width',
 					(rangeInput.value / rangeInput.max) * 100 + '%'
 				);
 		};
 
-		seekSlider.addEventListener('input', (e) => {
+		play_button?.addEventListener('click', (e) => {
+			if (playing) {
+				audio?.pause();
+				playing = !playing;
+			} else {
+				audio?.play();
+				playing = !playing;
+			}
+			play?.classList.toggle('hide');
+			pause?.classList.toggle('hide');
+		});
+
+		seekSlider?.addEventListener('input', (e) => {
 			showRangeProgress(e.target);
 		});
-		volumeSlider.addEventListener('input', (e) => {
+		volumeSlider?.addEventListener('input', (e) => {
 			showRangeProgress(e.target);
 		});
 
@@ -129,14 +125,14 @@
 
 <div id="audio-player-container">
 	<audio {src} preload="metadata" loop />
-	<div class="left">
+	<button id="play_button" class="left">
 		<iconify-icon class="play" icon="material-symbols:play-arrow-rounded" />
 		<iconify-icon class="pause hide" icon="material-symbols:pause-rounded" />
 		<span class="play-time">
 			<span id="current-time" class="time">0:00</span>/
 			<span id="duration" class="time">0:00</span>
 		</span>
-	</div>
+	</button>
 	<div class="middle">
 		<input type="range" class="seek-slider" max="100" value="0" />
 		<p>Playing: {title}</p>
@@ -167,9 +163,6 @@
 		background: transparent;
 		cursor: pointer;
 		outline: none;
-		width: var(--size);
-		height: var(--size);
-		color: var(--dark-purple);
 	}
 	p {
 		padding: 0.25rem;
@@ -238,12 +231,13 @@
 		width: 100%;
 		margin: 0;
 		padding: 0;
-		height: 19px;
+		height: 24px;
 		outline: none;
+		border-bottom: 3px solid var(--purple);
 	}
 	input[type='range']::-webkit-slider-runnable-track {
 		width: 100%;
-		height: 19px;
+		height: 21px;
 		cursor: pointer;
 		background: linear-gradient(
 			to right,
@@ -257,8 +251,8 @@
 		top: 0px;
 		left: 0;
 		width: var(--seek-before-width);
-		height: 19px;
-		background-color: var(--dark-purple);
+		height: 21px;
+		background: var(--dark-grad);
 		cursor: pointer;
 	}
 	input[type='range']::-webkit-slider-thumb {
@@ -267,7 +261,7 @@
 		box-sizing: content-box;
 		border: 1px solid var(--dark-purple);
 		height: 24px;
-		width: 5px;
+		width: 18px;
 		border-radius: 50vw;
 		background-color: var(--white);
 		cursor: pointer;

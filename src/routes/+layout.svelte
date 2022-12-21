@@ -15,6 +15,7 @@
 
 	$: src = $current_episode.url;
 	$: title = $current_episode.title;
+	$: number = $current_episode.number;
 </script>
 
 <Header />
@@ -24,7 +25,7 @@
 </div>
 <main>
 	<aside>
-		<Episodes episodes={all_episodes} />
+		<Episodes episodes={all_episodes} current={number} />
 	</aside>
 	<div class="main">
 		<slot />

@@ -1,12 +1,13 @@
 <script>
 	export let episodes;
+	export let current = 0;
 </script>
 
 <nav>
 	<ul>
 		{#each episodes as episode}
 			<a href={`/show/${episode.number}`}>
-				<li>
+				<li class={current === episode.number ? 'active' : ''}>
 					{episode.title}
 				</li>
 			</a>
@@ -29,7 +30,9 @@
 	li:last-child {
 		border-bottom: none;
 	}
+	.active,
 	li:hover {
+		font-family: var(--heading-font);
 		background: var(--header-bg-bright);
 	}
 

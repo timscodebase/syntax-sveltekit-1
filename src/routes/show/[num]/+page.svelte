@@ -12,9 +12,9 @@
 </script>
 
 <article>
-	<h1>{episode.title}</h1>
-
 	<div class="content">
+		<h1>{episode.title}</h1>
+
 		{@html episode.html}
 	</div>
 </article>
