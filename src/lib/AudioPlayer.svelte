@@ -1,64 +1,34 @@
 <script>
 	import { onMount } from 'svelte';
-	import lottieWeb from 'lottie-web';
+	import 'iconify-icon';
 
 	export let src = '';
 	export let title = '';
+	let playState = 'play';
 
 	onMount(() => {
-		const playIconContainer = document.getElementById('play-icon');
+		const play = document.querySelector('.play');
+		const pause = document.querySelector('.pause');
 		const audioPlayerContainer = document.getElementById('audio-player-container');
-		const seekSlider = document.getElementById('seek-slider');
+		const seekSlider = document.querySelector('.seek-slider');
 		const volumeSlider = document.getElementById('volume-slider');
-		const muteIconContainer = document.getElementById('mute-icon');
-		let playState = 'play';
-		let muteState = 'unmute';
 
-		const playAnimation = lottieWeb.loadAnimation({
-			container: playIconContainer,
-			path: 'https://maxst.icons8.com/vue-static/landings/animated-icons/icons/pause/pause.json',
-			renderer: 'svg',
-			loop: false,
-			autoplay: false,
-			name: 'Play Animation'
+		console.log('play', play);
+
+		play?.addEventListener('click', () => {
+			console.log('play');
+			audio?.play();
+			playState = 'pause';
+			play.classList.toggle('hide');
+			pause.classList.toggle('hide');
 		});
-
-		const muteAnimation = lottieWeb.loadAnimation({
-			container: muteIconContainer,
-			path: 'https://maxst.icons8.com/vue-static/landings/animated-icons/icons/mute/mute.json',
-			renderer: 'svg',
-			loop: false,
-			autoplay: false,
-			name: 'Mute Animation'
+		pause?.addEventListener('click', () => {
+			console.log('pause');
+			audio?.pause();
+			playState = 'play';
+			play.classList.toggle('hide');
+			pause.classList.toggle('hide');
 		});
-
-		playAnimation.goToAndStop(14, true);
-
-		playIconContainer.addEventListener('click', () => {
-			if (playState === 'play') {
-				audio.play();
-				playAnimation.playSegments([14, 27], true);
-				requestAnimationFrame(whilePlaying);
-				playState = 'pause';
-			} else {
-				audio.pause();
-				playAnimation.playSegments([0, 14], true);
-				cancelAnimationFrame(raf);
-				playState = 'play';
-			}
-		});
-
-		// muteIconContainer.addEventListener('click', () => {
-		// 	if (muteState === 'unmute') {
-		// 		muteAnimation.playSegments([0, 15], true);
-		// 		audio.muted = true;
-		// 		muteState = 'mute';
-		// 	} else {
-		// 		muteAnimation.playSegments([15, 25], true);
-		// 		audio.muted = false;
-		// 		muteState = 'unmute';
-		// 	}
-		// });
 
 		const showRangeProgress = (rangeInput) => {
 			if (rangeInput === seekSlider)
@@ -133,25 +103,24 @@
 			});
 		}
 
-		audio.addEventListener('progress', displayBufferedAmount);
+		audio?.addEventListener('progress', displayBufferedAmount);
 
-		seekSlider.addEventListener('input', () => {
+		seekSlider?.addEventListener('input', () => {
 			currentTimeContainer.textContent = calculateTime(seekSlider.value);
 			if (!audio.paused) {
 				cancelAnimationFrame(raf);
 			}
 		});
 
-		seekSlider.addEventListener('change', () => {
+		seekSlider?.addEventListener('change', () => {
 			audio.currentTime = seekSlider.value;
-			if (!audio.paused) {
+			if (!audio?.paused) {
 				requestAnimationFrame(whilePlaying);
 			}
 		});
 
-		volumeSlider.addEventListener('input', (e) => {
+		volumeSlider?.addEventListener('input', (e) => {
 			const value = e.target.value;
-
 			outputContainer.textContent = value;
 			audio.volume = value / 100;
 		});
@@ -161,35 +130,35 @@
 <div id="audio-player-container">
 	<audio {src} preload="metadata" loop />
 	<div class="left">
-		<button id="play-icon" />
+		<iconify-icon class="play" icon="material-symbols:play-arrow-rounded" />
+		<iconify-icon class="pause hide" icon="material-symbols:pause-rounded" />
 		<span class="play-time">
 			<span id="current-time" class="time">0:00</span>/
 			<span id="duration" class="time">0:00</span>
 		</span>
 	</div>
 	<div class="middle">
-		<input type="range" id="seek-slider" max="100" value="0" />
+		<input type="range" class="seek-slider" max="100" value="0" />
 		<p>Playing: {title}</p>
 	</div>
 	<div class="volume">
-		<div>
-			<input type="range" id="volume-slider" max="100" value="100" />
-			<span>Volume:</span><output id="volume-output">100</output>
-		</div>
+		<input type="range" id="volume-slider" max="100" value="100" />
+		<p><span>Volume:</span><output id="volume-output">100</output></p>
 	</div>
 </div>
 
 <style>
 	#audio-player-container {
+		--size: 100px;
 		--seek-before-width: 0%;
 		--volume-before-width: 100%;
 		--buffered-width: 0%;
-		background: rgba(255, 255, 255, 0.579);
+		background: rgba(0, 0, 0, 0.7);
 		position: relative;
 		display: grid;
-		grid-template-columns: 80px 1fr 200px;
-		color: var(--dark-purple);
-		gap: 1rem;
+		grid-template-columns: var(--size) 1fr 200px;
+		height: var(--size);
+		border-bottom: 3px solid var(--purple);
 	}
 	button {
 		--size: 80px;
@@ -213,23 +182,24 @@
 		justify-content: space-between;
 		align-items: center;
 	}
+	.left {
+		justify-content: space-around;
+	}
 	.left,
-	.volume {
-		padding: 1rem 0;
-	}
 	.middle {
-		padding: 1rem 0;
-	}
-	.volume {
-		padding: 1rem;
+		border-right: 3px solid var(--purple);
 	}
 	.volume span {
 		margin-right: 2rem;
 	}
-	.middle p {
+
+	.middle p,
+	.volume p {
 		display: inline-block;
-		font-size: 0.8rem;
+		font-size: 1rem;
 		width: 100%;
+		padding: 0.5rem 1rem;
+		font-family: var(--heading-font);
 	}
 	.play-time {
 		font-size: 0.7rem;
@@ -240,9 +210,13 @@
 		text-align: center;
 		font-size: 20px;
 	}
-	/* #volume-slider {
-		width: 58%;
-	} */
+	.play,
+	.pause {
+		font-size: 3rem;
+	}
+	.hide {
+		display: none;
+	}
 	#volume-slider::-webkit-slider-runnable-track {
 		background: var(--dark-purple);
 	}
@@ -263,7 +237,6 @@
 		-webkit-appearance: none;
 		width: 100%;
 		margin: 0;
-		margin-top: 1rem;
 		padding: 0;
 		height: 19px;
 		outline: none;
@@ -281,10 +254,10 @@
 	input[type='range']::before {
 		position: absolute;
 		content: '';
-		top: 8px;
+		top: 0px;
 		left: 0;
 		width: var(--seek-before-width);
-		height: 3px;
+		height: 19px;
 		background-color: var(--dark-purple);
 		cursor: pointer;
 	}
@@ -299,5 +272,6 @@
 		background-color: var(--white);
 		cursor: pointer;
 		margin: -3px 0 0 7.5px;
+		left: -10px;
 	}
 </style>

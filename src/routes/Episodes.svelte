@@ -5,9 +5,11 @@
 <nav>
 	<ul>
 		{#each episodes as episode}
-			<li>
-				<a href={`/show/${episode.number}`}>{episode.title}</a>
-			</li>
+			<a href={`/show/${episode.number}`}>
+				<li>
+					{episode.title}
+				</li>
+			</a>
 		{/each}
 	</ul>
 </nav>
@@ -17,6 +19,7 @@
 		list-style: none;
 		padding: 0;
 		border: 1px solid var(--grey);
+		border-right: 3px solid var(--purple);
 	}
 
 	li {
@@ -25,5 +28,13 @@
 	}
 	li:last-child {
 		border-bottom: none;
+	}
+	li:hover {
+		background: var(--header-bg-bright);
+	}
+
+	a {
+		cursor: pointer;
+		text-decoration: none !important;
 	}
 </style>

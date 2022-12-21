@@ -3,7 +3,7 @@
 :root {
 	--body-font: 'Merriweather', serif;
 	--heading-font: 'Merriweather Sans', sans-serif;
-	--max-width: 800px;
+	--max-width: 1000px;
 
 	--white: #eee;
 	--grey: #222;
@@ -15,6 +15,7 @@
 	--dark-purple: rgb(56, 22, 65);
 
 	--header-bg: hsla(285deg 100% 57% / 0.25);
+	--header-bg-bright: hsla(285deg 100% 57% / 0.5);
 
 	--dark-grad: linear-gradient(130deg,
 			hsl(0deg 0% 0%) 1%,
@@ -82,4 +83,9 @@ h5 {
 small,
 .text_small {
 	font-size: 0.8rem;
+}
+
+a {
+	text-decoration: underline dotted var(--purple);
+	text-underline-offset: 5px;
 }
