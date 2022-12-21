@@ -14,11 +14,17 @@
 <article>
 	<h1>{episode.title}</h1>
 
-	{@html episode.html}
+	<div class="content">
+		{@html episode.html}
+	</div>
 </article>
 
 <style>
 	article {
 		padding: 2rem 1rem;
+	}
+
+	.content {
+		padding: 1rem;
 	}
 </style>
