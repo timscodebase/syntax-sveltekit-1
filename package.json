@@ -30,6 +30,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"iconify-icon": "^1.0.2",
 		"lottie-web": "^5.10.0"
 	}
 }

@@ -8,6 +8,7 @@ specifiers:
   eslint: ^8.29.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-svelte3: ^4.0.0
+  iconify-icon: ^1.0.2
   lottie-web: ^5.10.0
   postcss: ^8.4.20
   prettier: ^2.8.1
@@ -19,6 +20,7 @@ specifiers:
   vite: ^4.0.1
 
 dependencies:
+  iconify-icon: 1.0.2
   lottie-web: 5.10.0
 
 devDependencies:
@@ -274,6 +276,10 @@ packages:
   /@humanwhocodes/object-schema/1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
+
+  /@iconify/types/2.0.0:
+    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
+    dev: false
 
   /@jridgewell/resolve-uri/3.1.0:
     resolution: {integrity: sha512-F2msla3tad+Mfht5cJq7LSXcdudKTWCVYUgw6pLFOOHSTtZlj6SWNYAp+AhuqLmWdBO2X5hPrLcu8cVP8fy28w==}
@@ -1150,6 +1156,12 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /iconify-icon/1.0.2:
+    resolution: {integrity: sha512-mehAvz2a4eUAlPo76Wul4zzsPNr3hbOHiauMhPrTVIdLOt0AnccnNloh1EeTO3tYeBv7iaJZfdCPHczvi+CkXQ==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
 
   /ignore/5.2.1:
     resolution: {integrity: sha512-d2qQLzTJ9WxQftPAuEQpSPmKqzxePjzVbpAVv62AQ64NTL+wR4JkrVqR/LqFsFEUsHDAiId52mJteHDFuDkElA==}
