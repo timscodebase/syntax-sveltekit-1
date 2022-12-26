@@ -153,7 +153,6 @@
 		position: relative;
 		display: grid;
 		grid-template-columns: var(--size) 1fr 200px;
-		height: var(--size);
 		border-bottom: 3px solid var(--purple);
 	}
 	button {

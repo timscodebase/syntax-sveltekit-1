@@ -87,4 +87,23 @@
 	label {
 		display: block;
 	}
+	input,
+	textarea {
+		display: block;
+		width: 100%;
+		background: var(--header-bg);
+		border: 3px solid var(--purple);
+		color: var(--white);
+		padding: 0.5rem;
+		font-family: var(--heading-font);
+	}
+
+	button {
+		color: var(--white);
+		border: 0;
+		width: fit-content;
+		padding: 0.5rem 1rem;
+		border-radius: 100vw;
+		background: var(--purple);
+	}
 </style>
