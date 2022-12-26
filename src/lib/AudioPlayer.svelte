@@ -133,6 +133,7 @@
 			<span id="duration" class="time">0:00</span>
 		</span>
 	</button>
+
 	<div class="middle">
 		<input type="range" class="seek-slider" max="100" value="0" />
 		<p>Playing: {title}</p>
