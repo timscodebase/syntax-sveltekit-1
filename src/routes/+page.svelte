@@ -1,6 +1,5 @@
 <script>
 	import { navigating, page, updated, getStores } from '$app/stores';
-	import Test from '$lib/Test.svelte';
 	import AudioPlayer from '$lib/AudioPlayer.svelte';
 	import '$db/start';
 	export let data;

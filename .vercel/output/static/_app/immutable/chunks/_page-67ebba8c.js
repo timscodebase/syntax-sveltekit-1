@@ -1,0 +1,1 @@
+async function a({fetch:t}){return{latest_episode:await(await t("https://syntax.fm/api/shows/latest")).json()}}const o=Object.freeze(Object.defineProperty({__proto__:null,load:a},Symbol.toStringTag,{value:"Module"}));export{o as _,a as l};
