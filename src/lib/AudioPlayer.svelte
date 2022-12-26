@@ -164,6 +164,7 @@
 		outline: none;
 	}
 	p {
+		margin: 8px 0;
 		padding: 0.25rem;
 	}
 	.left,
